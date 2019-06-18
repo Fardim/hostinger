@@ -29,11 +29,11 @@
           (click)="rowSelected(v, i)"
           [class.active]="i == selectedRow"
         >
-          <td>{{ v.teilenr }}</td>
-          <td>{{ v.teilebez_1 }}</td>
-          <td>{{ v.teilebez_2 }}</td>
-          <td>{{ v.nr_bez }}</td>
-          <td>{{ v.teileart }}</td>
+          <td>{{ v.id }}</td>
+          <td>{{ v.albumId }}</td>
+          <td>{{ v.title }}</td>
+          <td>{{ v.url }}</td>
+          <td>{{ v.thumbnailUrl }}</td>
         </tr>
       </tbody>
     </table>

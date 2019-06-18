@@ -20,11 +20,11 @@ export class HomeComponent implements OnInit {
   };
   pagination: Pagination;
   columns = [
-    { title: "Teile Nr", key: "teilenr", isSortable: true },
-    { title: "Teile Name 1", key: "teilebez_1", isSortable: true },
-    { title: "Teile Name 2", key: "teilebez_2", isSortable: true },
-    { title: "Number Name", key: "nr_bez", isSortable: true },
-    { title: "Teile Article", key: "teileart", isSortable: true }
+    { title: "Id", key: "id", isSortable: true },
+    { title: "Album Id", key: "albumId", isSortable: true },
+    { title: "Title", key: "title", isSortable: true },
+    { title: "Url", key: "url", isSortable: true },
+    { title: "Thumbnail Url", key: "thumbnailUrl", isSortable: true }
   ];
   selectedRow: number;
   constructor(private teileService: TeileService) {}
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.showSpinner = true;
     this.teileService.getTeile().subscribe(data => {
-      this.globalTeileList = [...data.records];
+      this.globalTeileList = [...data];
       this.pagination = {
         currentPage: 1,
         itemsPerPage: this.PAGE_SIZE,
