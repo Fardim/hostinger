@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   teileList: Teile[];
   teile: Teile;
   showSpinner: boolean = false;
+  showAll: boolean = false;
   query: any = {
     pageSize: this.PAGE_SIZE
   };
@@ -39,14 +40,17 @@ export class HomeComponent implements OnInit {
         totalItems: this.globalTeileList.length,
         totalPages: Math.ceil(this.globalTeileList.length / this.PAGE_SIZE)
       };
-      console.log(this.pagination);
       this.populateTeile();
       this.showSpinner = false;
     });
   }
 
   reset() {
-    this.query = {};
+    this.showAll = false;
+    this.query = {
+      sortBy: this.columns[0].key,
+      isSortAscending: true
+    };
     this.pagination = {
       currentPage: 1,
       itemsPerPage: this.PAGE_SIZE,
@@ -89,18 +93,26 @@ export class HomeComponent implements OnInit {
         .reverse()
         .value();
     }
-    console.log(this.globalTeileList);
   }
   applyPagination() {
-    this.teileList = this.globalTeileList.slice(
-      (this.pagination.currentPage - 1) * this.pagination.itemsPerPage,
-      this.pagination.currentPage * this.pagination.itemsPerPage
-    );
-    console.log(this.teileList);
+    if (this.showAll) {
+      this.teileList = this.globalTeileList;
+    } else {
+      this.teileList = this.globalTeileList.slice(
+        (this.pagination.currentPage - 1) * this.pagination.itemsPerPage,
+        this.pagination.currentPage * this.pagination.itemsPerPage
+      );
+    }
   }
 
   rowSelected(teile: Teile, selectedRow: number) {
     this.teile = teile;
     this.selectedRow = selectedRow;
+  }
+
+  populateAll() {
+    this.showAll = true;
+    this.pagination = null;
+    this.populateTeile();
   }
 }
