@@ -17,3 +17,7 @@
   overflow: hidden;
   max-width: 200px;
 }
+
+th {
+  cursor: pointer;
+}
